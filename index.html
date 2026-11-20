@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Öğretmen Atlası · Öğretmenin günü tek uygulamada</title>
+<meta name="description" content="Ders programı, ödev, yazılı, katılım ve rehberlik tek uygulamada. iPhone ve iPad için ücretsiz. Verileriniz yalnız cihazınızda.">
+<meta name="apple-itunes-app" content="app-id=6835607388">
+<style>
+  :root{
+    --ink:#1d1d1f; --muted:#6e6e73; --bg:#fff; --soft:#f5f5f7;
+    --dark:#000; --dark-ink:#f5f5f7; --dark-muted:#a1a1a6;
+    --teal:#0f8f84; --teal-2:#2bb8a8; --link:#0a7a70;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:var(--link);text-decoration:none}
+  .note{background:#fff4d6;color:#6b5000;font-size:12px;text-align:center;padding:6px 16px}
+
+  /* Üst menü */
+  .nav{position:sticky;top:0;z-index:10;background:rgba(251,251,253,.8);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,.08)}
+  .nav .in{max-width:1000px;margin:0 auto;padding:0 22px;height:52px;display:flex;align-items:center;justify-content:space-between}
+  .nav b{font-size:20px;font-weight:600;letter-spacing:-.01em}
+  .nav .links{display:flex;gap:22px;align-items:center;font-size:12px}
+  .nav .links a{color:var(--ink);opacity:.8}
+  .pill{background:var(--teal);color:#fff !important;opacity:1 !important;border-radius:980px;padding:5px 12px;font-weight:500}
+
+  /* Bölümler */
+  section{padding:110px 22px;text-align:center;overflow:hidden}
+  .soft{background:var(--soft)}
+  .dark{background:var(--dark);color:var(--dark-ink)}
+  .dark .sub,.dark p{color:var(--dark-muted)}
+  .eyebrow{font-size:21px;font-weight:600;color:var(--teal);margin:0 0 8px}
+  .dark .eyebrow{color:var(--teal-2)}
+  h1{font-size:clamp(48px,9vw,96px);line-height:1.02;letter-spacing:-.025em;font-weight:700;margin:0}
+  h2{font-size:clamp(36px,6vw,64px);line-height:1.06;letter-spacing:-.02em;font-weight:700;margin:0 auto;max-width:900px}
+  .sub{font-size:clamp(19px,2.4vw,28px);line-height:1.25;color:var(--muted);font-weight:500;margin:18px auto 0;max-width:760px;letter-spacing:-.01em}
+  .grad{background:linear-gradient(90deg,var(--teal),#3a7bd5);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .ctas{display:flex;gap:26px;justify-content:center;align-items:center;margin-top:30px;font-size:19px}
+  .btn{background:var(--teal);color:#fff;border-radius:980px;padding:12px 24px;font-size:17px}
+  .more::after{content:" ›"}
+
+  /* Görseller */
+  .hero-img{margin:60px auto 0;max-width:980px;border-radius:28px;box-shadow:0 30px 80px rgba(0,0,0,.18)}
+  .phones{display:flex;gap:24px;justify-content:center;align-items:flex-end;margin:60px auto 0;max-width:900px}
+  .phones img{width:30%;border-radius:36px;box-shadow:0 24px 60px rgba(0,0,0,.25)}
+  .phones img:nth-child(2){width:34%;transform:translateY(-24px)}
+  .wide{margin:56px auto 0;max-width:1000px;border-radius:24px;box-shadow:0 24px 70px rgba(0,0,0,.35)}
+
+  /* Rakamlar */
+  .stats{display:flex;justify-content:center;gap:70px;margin-top:64px;flex-wrap:wrap}
+  .stat b{display:block;font-size:56px;letter-spacing:-.02em;font-weight:700}
+  .stat span{color:var(--muted);font-size:17px}
+
+  /* Kutu ızgarası */
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1000px;margin:56px auto 0;text-align:left}
+  .tile{background:#fff;border-radius:28px;padding:32px 28px;min-height:230px;display:flex;flex-direction:column}
+  .tile .ic{font-size:36px;margin-bottom:auto}
+  .tile h3{font-size:24px;letter-spacing:-.01em;margin:24px 0 8px}
+  .tile p{margin:0;color:var(--muted);font-size:16px;line-height:1.45}
+  .tile.big{grid-column:span 2;background:linear-gradient(135deg,#0f8f84,#0b5e57);color:#fff}
+  .tile.big p{color:rgba(255,255,255,.8)}
+
+  /* Gizlilik */
+  .lock{font-size:72px;margin-bottom:20px}
+  .bullets{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;max-width:900px;margin:60px auto 0;text-align:left}
+  .bullets h4{font-size:21px;margin:0 0 8px;color:var(--dark-ink)}
+  .bullets p{margin:0;font-size:16px;line-height:1.5}
+
+  /* Video */
+  .video{max-width:980px;margin:50px auto 0;aspect-ratio:16/9;border-radius:24px;background:#111;display:flex;align-items:center;justify-content:center;color:#888;font-size:17px;border:1px solid #333}
+  .play{width:76px;height:76px;border-radius:50%;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:30px;color:#fff}
+
+  /* SSS */
+  .faq{max-width:760px;margin:44px auto 0;text-align:left}
+  details{border-bottom:1px solid #d2d2d7;padding:22px 0}
+  summary{font-size:21px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between}
+  summary::after{content:"+";font-weight:300;font-size:28px;line-height:1;color:var(--muted)}
+  details[open] summary::after{content:"−"}
+  details p{color:var(--muted);font-size:17px;line-height:1.5;margin:12px 0 0}
+
+  footer{background:var(--soft);color:var(--muted);font-size:12px;padding:24px 22px 40px}
+  footer .in{max-width:1000px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid #d2d2d7;padding-top:16px}
+  footer a{color:var(--muted)}
+
+  /* Kaydırınca belirme */
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity .9s ease,transform .9s ease}
+  .reveal.on{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+  @media (max-width:760px){
+    section{padding:80px 20px}
+    .tiles{grid-template-columns:1fr}.tile.big{grid-column:auto}
+    .bullets{grid-template-columns:1fr;gap:28px}
+    .stats{gap:36px}
+    .nav .links a:not(.pill){display:none}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav"><div class="in">
+  <b>Öğretmen Atlası</b>
+  <div class="links"><a href="#ozellikler">Özellikler</a><a href="#gizlilik">Gizlilik</a><a href="#sss">Sık sorulanlar</a><a href="https://sites.google.com/view/ogretmenatlasi">Destek</a><a class="pill" href="https://apps.apple.com/tr/app/id6835607388">İndir</a></div>
+</div></nav>
+
+<!-- 1. Giriş -->
+<section>
+  <div class="reveal">
+    <p class="eyebrow">Öğretmen Atlası</p>
+    <h1>Öğretmenin günü.<br><span class="grad">Tek uygulamada.</span></h1>
+    <p class="sub">Ders programı, ödev, yazılı, katılım ve rehberlik. iPhone ve iPad için.</p>
+    <div class="ctas"><a class="btn" href="https://apps.apple.com/tr/app/id6835607388">App Store'dan indirin</a><a class="more" href="#ozellikler">Daha fazla bilgi</a></div>
+  </div>
+  <img class="hero-img reveal" src="gorseller/iPad-13-01-ana-sayfa.jpg" alt="iPad'de Öğretmen Atlası ana sayfa">
+</section>
+
+<!-- 2. Bugün -->
+<section class="soft" id="ozellikler">
+  <div class="reveal">
+    <p class="eyebrow">Bugün</p>
+    <h2>Sıradaki dersiniz.<br>Bekleyen ödevler. Tek bakışta.</h2>
+    <p class="sub">Ders programınızı PDF'ten ya da fotoğraftan okutun. Atlas günü sizin için sıraya koysun.</p>
+  </div>
+  <div class="phones reveal">
+    <img src="gorseller/iPhone-6.9-02-odev-kontrolu.jpg" alt="Ödev kontrolü">
+    <img src="gorseller/iPhone-6.9-01-bugun.jpg" alt="Bugün">
+    <img src="gorseller/iPhone-6.9-03-ogrenci-ozeti.jpg" alt="Öğrenci özeti">
+  </div>
+</section>
+
+<!-- 3. Ölçme ve değerlendirme (koyu) -->
+<section class="dark">
+  <div class="reveal">
+    <p class="eyebrow">Ölçme ve değerlendirme</p>
+    <h2>Yazılıyı okuyun.<br>Gerisini Atlas çözsün.</h2>
+    <p class="sub">Şube şube analiz, soru bazında ısı haritası, sık yapılan hatalar ve telafi. Katılım ve performans notunu ölçekle verin.</p>
+  </div>
+  <img class="wide reveal" src="gorseller/iPad-13-02-yazili-analizi.jpg" alt="Yazılı analizi">
+  <div class="stats reveal">
+    <div class="stat"><b>4 düzey</b><span>ölçütlü katılım puanı</span></div>
+    <div class="stat"><b>Soru soru</b><span>başarı ve kazanım</span></div>
+    <div class="stat"><b>1 dokunuş</b><span>karne ve çizelge PDF'i</span></div>
+  </div>
+</section>
+
+<!-- 4. Kutular -->
+<section class="soft">
+  <div class="reveal">
+    <h2>Bir öğretmenin ihtiyacı olan her şey.</h2>
+  </div>
+  <div class="tiles">
+    <div class="tile big reveal"><div class="ic">✨</div><h3>Öğretmen Asistanı</h3><p>"Bu sınıfa ödev ver", "yazılıda 50 altı kim?" Sorun, Atlas cevaplasın. Öğrenci adları yapay zekâya hiç gitmez.</p></div>
+    <div class="tile reveal"><div class="ic">📈</div><h3>Öğrenci gelişimi</h3><p>Ödevini aksatanlar ve düşüşteki öğrenciler öne çıkar.</p></div>
+    <div class="tile reveal"><div class="ic">📝</div><h3>Ödev ve soru takibi</h3><p>Ver, kontrol et, eksikleri tek listede gör.</p></div>
+    <div class="tile reveal"><div class="ic">🧭</div><h3>Rehberlik</h3><p>Görüşme ve destek notları yalnız cihazınızda kalır.</p></div>
+    <div class="tile reveal"><div class="ic">🗂️</div><h3>Evrak ve nöbet</h3><p>Planlar, tutanaklar ve tatilleri atlayan nöbet çizelgesi.</p></div>
+  </div>
+</section>
+
+<!-- 5. Gizlilik (koyu) -->
+<section class="dark" id="gizlilik">
+  <div class="reveal">
+    <div class="lock">🔒</div>
+    <h2>Öğrencileriniz size emanet.<br><span class="grad">Atlas da öyle davranır.</span></h2>
+  </div>
+  <div class="bullets reveal">
+    <div><h4>Veriler cihazınızda</h4><p>Notlar, listeler ve kâğıtlar iPhone'unuzda ya da iPad'inizde kalır. Hesap gerekmez.</p></div>
+    <div><h4>Ad değil, numara</h4><p>Yapay zekâya öğrenciler yalnız okul numarasıyla gider; rehberlik notları hiç gitmez.</p></div>
+    <div><h4>Reklam yok</h4><p>İzleme yok, analiz yok. Yapay zekâ isteğe bağlıdır ve izninizi ister.</p></div>
+  </div>
+</section>
+
+
+<!-- 7. SSS -->
+<section class="soft" id="sss">
+  <h2 class="reveal">Sık sorulanlar</h2>
+  <div class="faq reveal">
+    <details open><summary>Ücretli mi?</summary><p>Uygulama şu an ücretsizdir. Yapay zekâ özelliklerinde günlük kullanım sınırı vardır.</p></details>
+    <details><summary>Verilerim nerede duruyor?</summary><p>Yalnızca iPhone'unuzda veya iPad'inizde. Düzenli yedek almanızı öneririz (Ayarlar › Yedekleme ve sürüm).</p></details>
+    <details><summary>Öğrenci adları yapay zekâya gidiyor mu?</summary><p>Hayır. Yapay zekâ isteğe bağlıdır, ilk kullanımda izninizi ister; öğrenciler yalnız numarayla anılır.</p></details>
+    <details><summary>iPhone ile iPad eşitleniyor mu?</summary><p>Kendiliğinden eşitlenmez. Bir cihazda yedek alıp diğerinde yükleyerek taşıyabilirsiniz.</p></details>
+    <details><summary>Ortaokulda da kullanılır mı?</summary><p>Evet. Okul türünü "Ortaokul" seçince ders etkinliklerine katılım puanı ve katılım ölçeği kullanılır.</p></details>
+    <details><summary>Kırmızı Kalem ile nasıl çalışır?</summary><p>Kırmızı Kalem'de okunan yazılı, test ve deneme sonuçları tek dosyayla Atlas'a aktarılır.</p></details>
+  </div>
+</section>
+
+<!-- 8. Son çağrı -->
+<section>
+  <div class="reveal">
+    <h2>Yarınki derse hazır mısınız?</h2>
+    <p class="sub">Ücretsiz indirin. Örnek verilerle hemen deneyin.</p>
+    <div class="ctas"><a class="btn" href="https://apps.apple.com/tr/app/id6835607388">App Store'dan indirin</a></div>
+  </div>
+</section>
+
+<footer><div class="in">
+  <span>Bir öğretmen tarafından, öğretmenler için geliştirildi.</span>
+  <span><a href="https://sites.google.com/view/ogretmenatlasi">Destek</a> · <a href="https://sites.google.com/view/ogretmenatlasi/gizlilik">Gizlilik Politikası</a> · onderaksu2848@gmail.com</span>
+</div></footer>
+
+<script>
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
